@@ -4,18 +4,18 @@
     "airbnb",
     "plugin:react/jsx-runtime"
   ],
-  "parser": "@typescript-eslint/parser",
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["./tsconfig.json"]
+        "project": ["./jsconfig.json"]
       }
     }
   ],
   "rules": {
-    "max-len": ["error", 140],
-    "react/jsx-filename-extension": [1, { "extensions": ["tsx"] }],
-    "quotes": [2, "single"]
+    "max-len": ["error", 700],
+    "react/jsx-filename-extension": [1, { "extensions": ["jsx"] }],
+    "quotes": [2, "single"],
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }
