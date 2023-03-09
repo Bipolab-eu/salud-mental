@@ -61,7 +61,7 @@ export default function Encuesta() {
 
   return (
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="py-10 px-6">
       <Label.Root className="text-[12px] font-light leading-[35px] text-white" htmlFor="q1" />
       { questions.map((question, idx) => (
         <div key={question}>

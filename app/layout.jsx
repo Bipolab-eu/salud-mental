@@ -1,12 +1,7 @@
 import './globals.scss';
 import './tailwind.globals.scss';
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
-
-const font = Inter({
-  weight: '300',
-  subsets: ['latin'],
-});
+import fontInter from './styles/fonts';
 
 export const metadata = {
   title: 'Salud mental adolescentes',
@@ -20,7 +15,7 @@ export default function RootLayout({ children }) {
         <meta name="title" content={metadata.title} />
         <meta name="description" content={metadata.description} />
       </Head>
-      <body className={font.className}>{children}</body>
+      <body className={fontInter.className}>{children}</body>
     </html>
   );
 }

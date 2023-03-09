@@ -8,6 +8,44 @@ html {
   font-weight: 300;
 }
 
-body {
-  padding: 2.5rem 1.5rem
+.marker-popup, .leaflet-popup-content-wrapper {
+  width: 217px;
+  min-width: 217px;
+  height: 196px;
+  min-height: 196px;
+  font-family: var(--font-inter) !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #000 !important;
+  top: unset !important;
+  bottom: 10px;
+  right: 7px !important;
+  padding-right: 7px !important;
+  margin-bottom: 9px !important;
+  margin-right: 4px !important;
+  font-size: 25px !important;
+}
+
+.leaflet-popup-tip {
+  display: none;
+}
+
+.leaflet-popup {
+  margin-bottom: 5px;
+  margin-left: 18px;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button, div {
+  font-family: var(--font-inter) !important;
+  font-size: 12px;
+}
+
+.leaflet-popup-close-button div {
+  margin: -10px;
+  padding-top: 2px;
 }
