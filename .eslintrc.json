@@ -16,6 +16,7 @@
     "max-len": ["error", 700],
     "react/jsx-filename-extension": [1, { "extensions": ["jsx"] }],
     "quotes": [2, "single"],
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/prop-types": "off"
   }
 }
