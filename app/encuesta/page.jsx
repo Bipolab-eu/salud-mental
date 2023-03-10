@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-restricted-syntax */
 
 'use client';
 
+import axios from 'axios';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Separator from '@radix-ui/react-separator';
 import * as Label from '@radix-ui/react-label';
+
 import {
   model1,
   model2,
@@ -27,36 +30,37 @@ const questions = [
   ['¿Te sientes cómodo/a hablando sobre tus sentimientos con otras personas?', model5],
   ['¿Sitnes que tienes suficione apoyo emocional de tu entorno?', model6],
 ];
-
-const test = {
-  nombre: '',
-  apellidos: '',
-  documento_identidad: '',
-  test: [],
-  createdAt: null,
-};
+// const fetcher = (...args) => fetch(...args);
 
 export default function Encuesta() {
   const alumno = {
     nombre: 'Marcos',
+    email: 'marcosa.mm@icloud.com',
     apellidos: 'Marrero Miranda',
     centro: 'Siete palmas',
-    documento_identidad: '44722126Y',
+    documento_identidad: '44722126YS',
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    const payload = {
-      ...test,
-      ...alumno,
-      createdAt: Date.now(),
-    };
+  async function sentTest(data) {
+    const response = await axios.post('/api/send-test', data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    return response;
+  }
 
-    for (const [key, val] of Object.entries(data)) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.currentTarget));
+    const test = [];
+
+    for (const [key, val] of Object.entries(formData)) {
       const answerValues = val.split('-');
-      payload.test.push({ question: key.slice(1), answer: answerValues[0], value: +answerValues[1] });
+      test.push({ question: key.slice(1), answer: answerValues[0], value: +answerValues[1] });
     }
+    await sentTest({ ...alumno, test });
   };
 
   return (

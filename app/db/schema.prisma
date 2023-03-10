@@ -1,0 +1,19 @@
+datasource db {
+  url      = "DATABASE_URL"
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Alumno {
+  id                    Int       @id @default(autoincrement())
+  createdAt             DateTime  @default(now()) @map(name: "created_at")
+  email                 String    @unique
+  nombre                String
+  apellidos             String
+  centro                String
+  documento_identidad   String    @unique
+  test                  Json
+}
