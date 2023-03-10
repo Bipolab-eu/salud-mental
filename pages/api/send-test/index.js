@@ -1,11 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+import prisma from '../../../lib/prisma.service';
 
 export default async function handler(request, res) {
   const { body } = request;
   try {
-    const response = await prisma.alumno.create({
+    const response = await prisma.test.create({
       data: body,
     });
     return res.status(200).json(response);
