@@ -11,8 +11,8 @@ import fontInter from '@/styles/fonts';
 import 'leaflet/dist/leaflet.css';
 
 export default function Map(props) {
-  const close = document.createElement('div');
-  close.innerText = 'cerrar';
+  // const close = document.createElement('div');
+  // close.innerText = 'cerrar';
 
   function EventHandlerComponent() {
     const map = useMapEvents({
@@ -23,8 +23,8 @@ export default function Map(props) {
       },
       popupopen: () => {
         // Texto cerrar del botón de salir
-        const element = document.querySelector('.leaflet-popup-close-button');
-        element.appendChild(close);
+        // const element = document.querySelector('.leaflet-popup-close-button');
+        // element.appendChild(close);
       },
     });
 
@@ -71,6 +71,9 @@ export default function Map(props) {
                 Estado de salud:
                 <div>{marker.status}</div>
               </li>
+              <span className="absolute bottom-1 right-2">
+                cerrar
+              </span>
             </ul>
           </Popup>
         </Marker>

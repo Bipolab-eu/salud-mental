@@ -31,7 +31,7 @@ const questions = [
   ['¿Sientes que has perdido interés en las actividades que solías disfrutar?', model4],
   ['¿Te has sentido tan triste o deprimido/a que has pensado en hacerte daño?', model1],
   ['¿Te sientes cómodo/a hablando sobre tus sentimientos con otras personas?', model5],
-  ['¿Sitnes que tienes suficione apoyo emocional de tu entorno?', model6],
+  ['¿Sientes que tienes suficione apoyo emocional de tu entorno?', model6],
 ];
 // const fetcher = (...args) => fetch(...args);
 
