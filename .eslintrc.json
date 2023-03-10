@@ -20,6 +20,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/prop-types": "off",
     "import/no-unresolved": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "import/prefer-default-export": 0
   }
 }
