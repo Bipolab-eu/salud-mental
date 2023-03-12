@@ -44,7 +44,6 @@ export default function Login() {
 
   return (
     <div className="lg:w-auto  w-screen h-screen p-8 grid">
-      {JSON.stringify(errors)}
       <h4 className="mt-auto pb-10 block mx-auto leading-4">
         Antes de empezar
         <br />
