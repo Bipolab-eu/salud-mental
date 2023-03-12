@@ -11,20 +11,12 @@ import fontInter from '@/styles/fonts';
 import 'leaflet/dist/leaflet.css';
 
 export default function Map(props) {
-  // const close = document.createElement('div');
-  // close.innerText = 'cerrar';
-
   function EventHandlerComponent() {
     const map = useMapEvents({
       locationfound: (location) => {
         // Obtener coordenadas del usuario por gps
         const latLng = Object.values(location.latlng);
         map.setView(latLng);
-      },
-      popupopen: () => {
-        // Texto cerrar del botón de salir
-        // const element = document.querySelector('.leaflet-popup-close-button');
-        // element.appendChild(close);
       },
     });
 
@@ -36,7 +28,7 @@ export default function Map(props) {
   return (
     <MapContainer
       className="w-full h-full"
-      center={[50.000, -15.000]}
+      center={[28.0997300, -15.4134300]}
       zoom={14}
       scrollWheelZoom
     >
@@ -52,7 +44,7 @@ export default function Map(props) {
         >
           <Popup
             className="marker-popup"
-            offset={[120, 10]}
+            offset={[135, 25]}
           >
             <ul className={`${fontInter.className} text-xs text-black`}>
               <li className="pb-2">
@@ -71,7 +63,7 @@ export default function Map(props) {
                 Estado de salud:
                 <div>{marker.status}</div>
               </li>
-              <span className="absolute bottom-1 right-2">
+              <span className="absolute bottom-2 right-2">
                 cerrar
               </span>
             </ul>

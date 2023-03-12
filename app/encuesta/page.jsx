@@ -3,7 +3,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Separator from '@radix-ui/react-separator';
 import * as Label from '@radix-ui/react-label';
@@ -35,19 +35,16 @@ const questions = [
 ];
 // const fetcher = (...args) => fetch(...args);
 
-async function sentTest(data) {
-  const response = await fetch('/api/send-test', {
+function sentTest(data) {
+  const response = fetch('/api/send-test', {
     method: 'POST',
     body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
   });
   return response;
 }
 
 export default function Encuesta() {
+  const formRef = useRef();
   const [open, setOpen] = useState(false);
   const [response, setResponse] = useState('Felicidades, la encuesta ha sido registrada correctamente');
   const [loading, setLoading] = useState(false);
@@ -67,16 +64,22 @@ export default function Encuesta() {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     const test = formatTest(formData);
-    const center = 'IES Siete Palmas';
 
-    try {
-      await sentTest({ center, test });
-    } catch (error) {
-      setResponse(error.response ?? error.toString());
-    } finally {
-      setOpen(true);
-      setLoading(false);
-    }
+    // Obtener del selector y del input
+    const args = {
+      centroId: 35000410,
+      edad: 14,
+      genero: 'Marculino',
+    };
+
+    await sentTest({ ...args, test })
+      .then(() => setOpen(true))
+      .catch((error) => {
+        setResponse(error.code);
+      });
+
+    setLoading(false);
+    formRef.reset();
   };
 
   return (
@@ -86,7 +89,7 @@ export default function Encuesta() {
         open={open}
         setOpen={setOpen}
       />
-      <form onSubmit={handleSubmit} className="py-10 px-6">
+      <form ref={formRef} onSubmit={handleSubmit} className="py-10 px-6">
         <Label.Root className="text-[12px] font-light leading-[35px] text-white" htmlFor="q1" />
         { questions.map((question, idx) => (
           <div key={question}>

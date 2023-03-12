@@ -15,7 +15,12 @@ export default function RootLayout({ children }) {
         <meta name="title" content={metadata.title} />
         <meta name="description" content={metadata.description} />
       </Head>
-      <body className={fontInter.className}>{children}</body>
+      <body className={`${fontInter.className} snap-y snap-mandatory`}>
+        {children}
+        <footer className="fixed bottom-0 flex justify-center w-full py-2">
+          <p>Powered by Bipolab</p>
+        </footer>
+      </body>
     </html>
   );
 }

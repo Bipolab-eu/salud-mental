@@ -8,6 +8,10 @@ html {
   font-weight: 300;
 }
 
+footer {
+  font-size: 10px !important;
+}
+
 .marker-popup, .leaflet-popup-content-wrapper {
   width: 217px;
   min-width: 217px;
@@ -31,11 +35,6 @@ html {
   display: none;
 }
 
-.leaflet-popup {
-  margin-bottom: 5px;
-  margin-left: 18px;
-}
-
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   box-shadow: none !important;
 }
@@ -48,4 +47,8 @@ html {
 .leaflet-popup-close-button div {
   margin: -10px;
   padding-top: 2px;
+}
+
+h4 {
+  font-size: 12px !important;
 }

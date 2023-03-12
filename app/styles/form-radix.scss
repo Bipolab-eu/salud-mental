@@ -1,0 +1,88 @@
+@import '@radix-ui/colors/blackA.css';
+@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/mauve.css';
+
+/* reset */
+input,
+textarea,
+button {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.FormRoot {
+  width: 100%;
+}
+
+.FormField {
+  display: grid;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.FormMessage {
+  font-size: 13px;
+  color: #fcc4c4 !important;
+  opacity: 0.8;
+  padding-bottom: 0.2rem;
+}
+
+.Input::placeholder {
+  color:  #5746AF !important;
+}
+
+.Input {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 12px;
+  color: white;
+  background-color: var(--blackA5);
+}
+.Input:hover,
+.Input:focus,
+.Input::selection,
+.Input {
+  border-radius: 99px;
+  color: #000;
+  background: #fff;
+  border-radius: 99px;
+  padding: 25px 10px;
+  height: 35px;
+  line-height: 1;
+  -webkit-border-radius: 99px;
+  -moz-border-radius: 99px;
+  -ms-border-radius: 99px;
+  -o-border-radius: 99px;
+}
+
+.Textarea {
+  resize: none;
+  padding: 10px;
+}
+
+.Button {
+  background: #fff !important;
+  border-radius: 99px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 99px;
+  padding: 20px 15px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--violet11);
+  -webkit-border-radius: 99px;
+  -moz-border-radius: 99px;
+  -ms-border-radius: 99px;
+  -o-border-radius: 99px;
+}
+.Button:hover {
+  background-color: var(--mauve3);
+}
+.Button:focus {
+  box-shadow: 0 0 0 2px black;
+}
