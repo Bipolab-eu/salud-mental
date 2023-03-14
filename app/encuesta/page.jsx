@@ -4,10 +4,10 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Separator from '@radix-ui/react-separator';
 import * as Label from '@radix-ui/react-label';
-import MyToast from 'components/MyToast';
 
 // import { v4 as uuidv4 } from 'uuid';
 
@@ -44,9 +44,8 @@ function sendTest(data) {
 }
 
 export default function Encuesta() {
+  const router = useRouter();
   const formRef = useRef();
-  const [open, setOpen] = useState(false);
-  const [response, setResponse] = useState('Felicidades, la encuesta ha sido registrada correctamente');
   const [loading, setLoading] = useState(false);
   const formatTest = (formData) => {
     const test = [];
@@ -80,7 +79,9 @@ export default function Encuesta() {
       centroId: +centroId,
       test,
     })
-      .then(() => setOpen(true))
+      .then(() => {
+        router.push('/success');
+      })
       .catch((error) => {
         console.log(error);
         setResponse(error.code);
@@ -91,52 +92,45 @@ export default function Encuesta() {
   };
 
   return (
-    <>
-      <MyToast
-        message={response}
-        open={open}
-        setOpen={setOpen}
-      />
-      <form ref={formRef} onSubmit={handleSubmit} className="py-10 px-6">
-        <Label.Root className="text-[12px] font-light leading-[35px] text-white" htmlFor="q1" />
-        { questions.map((question, idx) => (
-          <div key={question}>
-            <p className="text-[12px] my-4">{question[0]}</p>
-            <RadioGroup.Root
-              name={`q${idx + 1}`}
-              className="flex flex-col gap-2.5"
-              defaultValue="default"
-              aria-label="View density"
-              required
-            >
-              {Object.keys(question[1]).map((option) => (
-                <div key={option} className="flex items-center">
-                  <RadioGroup.Item
-                    className="bg-white w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default"
-                    value={`${question[1][option]}-${option.slice(1)}`}
-                    id={option}
-                    required
-                  >
-                    <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:bg-violet11" />
-                  </RadioGroup.Item>
-                  <label className="text-white text-[12px] leading-none pl-[15px]" htmlFor={option}>
-                    { question[1][option] }
-                    {' '}
-                  </label>
-                </div>
+    <form ref={formRef} onSubmit={handleSubmit} className="py-10 px-6">
+      <Label.Root className="text-[12px] font-light leading-[35px] text-white" htmlFor="q1" />
+      { questions.map((question, idx) => (
+        <div key={question}>
+          <p className="text-[12px] my-4">{question[0]}</p>
+          <RadioGroup.Root
+            name={`q${idx + 1}`}
+            className="flex flex-col gap-2.5"
+            defaultValue="default"
+            aria-label="View density"
+            required
+          >
+            {Object.keys(question[1]).map((option) => (
+              <div key={option} className="flex items-center">
+                <RadioGroup.Item
+                  className="bg-white w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default"
+                  value={`${question[1][option]}-${option.slice(1)}`}
+                  id={option}
+                  required
+                >
+                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:bg-violet11" />
+                </RadioGroup.Item>
+                <label className="text-white text-[12px] leading-none pl-[15px]" htmlFor={option}>
+                  { question[1][option] }
+                  {' '}
+                </label>
+              </div>
 
-              ))}
-              <Separator.Root className="bg-violet6 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-[10px]" />
-            </RadioGroup.Root>
-          </div>
-        ))}
-        <button
-          type="submit"
-          className="block mx-auto my-12 py-4 px-sm text-[#5746A] rounded-full bg-neutral-50 px-6 text-xs font-medium leading-normal text-neutral-800 shadow-[0_1px_9px_-4px_#ffff] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]"
-        >
-          {loading ? 'Guardando' : 'Finalizar encuesta'}
-        </button>
-      </form>
-    </>
+            ))}
+            <Separator.Root className="bg-violet6 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-[10px]" />
+          </RadioGroup.Root>
+        </div>
+      ))}
+      <button
+        type="submit"
+        className="block mx-auto my-12 py-4 px-sm text-[#5746A] rounded-full bg-neutral-50 px-6 text-xs font-medium leading-normal text-neutral-800 shadow-[0_1px_9px_-4px_#ffff] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.3),0_4px_18px_0_rgba(251,251,251,0.2)]"
+      >
+        {loading ? 'Guardando' : 'Finalizar encuesta'}
+      </button>
+    </form>
   );
 }

@@ -1,14 +1,4 @@
-import prisma from '../../../lib/prisma';
-
-async function checkCode({ centroId, codigo }) {
-  const response = await prisma.codigo.findFirst({
-    where: {
-      codigo,
-      centroId: +centroId,
-    },
-  });
-  return response;
-}
+import { checkCode } from '../../../lib';
 
 export default async function handler(request, res) {
   const { centroId, codigo } = request.query;

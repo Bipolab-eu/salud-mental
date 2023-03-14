@@ -40,7 +40,6 @@ export default function Login() {
         insitutos[centro.id] = { value: centro.id, label: centro.nombre };
       });
     }
-
     if (Object.keys(insitutos).length) setCentros(insitutos);
   }, [data]);
 
@@ -58,7 +57,6 @@ export default function Login() {
       const {
         edad,
         genero,
-        codigo,
         instituto,
       } = formData;
 

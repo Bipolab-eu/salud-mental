@@ -33,7 +33,7 @@ model Centro {
 
 model Codigo {
   id        BigInt   @id @unique
-  uso       Int      
+  uso       Int?      
   codigo    String   @unique
   centroId  BigInt   @map("centro_id")
   centro    Centro   @relation(fields: [centroId], references: [id])

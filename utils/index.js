@@ -1,4 +1,4 @@
-const toJson = (data) => JSON.stringify(data, (_, v) => (typeof v === 'bigint' ? v.toString() : v));
+const toJson = (data) => JSON.parse(JSON.stringify(data, (_, v) => (typeof v === 'bigint' ? v.toString() : v)));
 
 const generarCodigo = () => {
   let caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
