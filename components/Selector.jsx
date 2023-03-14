@@ -26,7 +26,7 @@ export default function SelectorInstitutos({
           <SelectPrimitive.Viewport className="SelectViewport">
             <SelectPrimitive.Group>
               <SelectPrimitive.Label className="SelectLabel">{name}</SelectPrimitive.Label>
-              {options && options.map((opt) => (<SelectItem key={opt} value={opt.toLowerCase()}>{opt}</SelectItem>))}
+              {options && Object.keys(options).map((opt) => (<SelectItem key={opt} value={options[opt].value}>{options[opt].label}</SelectItem>))}
             </SelectPrimitive.Group>
           </SelectPrimitive.Viewport>
           <SelectPrimitive.ScrollDownButton className="SelectScrollButton">

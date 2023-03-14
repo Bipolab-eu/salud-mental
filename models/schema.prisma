@@ -5,22 +5,38 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-model Instituto {
-  id                BigInt      @id
-  nombre            String
-  direccion         String
-  tests             Test[]
+  // directUrl = env("DIRECT_URL")
 }
 
 model Test {
-  id                BigInt      @id @default(autoincrement())
-  createdAt         DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
-  edad              Int
-  genero            String
-  centro            Instituto   @relation(fields: [centroId], references: [id])
-  test              Json?       @db.Json
-  centroId          BigInt   
+  id        BigInt   @id @unique @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  edad      Int
+  genero    String
+  test      Json?    @db.JsonB
+  centroId  BigInt   @map("centro_id")
+  codigoId  BigInt   @map("codigo_id")
+  centro    Centro   @relation(fields: [centroId], references: [id])
+  codigo    Codigo   @relation(fields: [codigoId], references: [id])
 }
 
+model Centro {
+  id                  BigInt   @id @unique
+  nombre              String
+  direccion           String
+  municipio           String
+  codigoPostal        BigInt   @map("codigo_postal")
+  coordenadas         Json     @db.Json
+  tests               Test[]
+  codigos_registrados Codigo[]
+}
+
+model Codigo {
+  id        BigInt   @id @unique
+  uso       Int      
+  codigo    String   @unique
+  centroId  BigInt   @map("centro_id")
+  centro    Centro   @relation(fields: [centroId], references: [id])
+  createtAd DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  Test      Test[]
+}

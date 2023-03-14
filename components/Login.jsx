@@ -1,5 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
-import { useState } from 'react';
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import * as Form from '@radix-ui/react-form';
 
@@ -19,23 +22,58 @@ const GENERO_OPTIONS = [
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Login() {
+  const [codeIsValid, setCode] = useState({
+    valid: true,
+    error: null,
+  });
+  const [centros, setCentros] = useState({});
   const router = useRouter();
   const [errors, setErrors] = useState([]);
 
   const { data } = useSWR('/api/centros', fetcher);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const insitutos = {};
+
+    if (typeof data !== 'undefined' && !data.clientVersion) {
+      data?.forEach((centro) => {
+        insitutos[centro.id] = { value: centro.id, label: centro.nombre };
+      });
+    }
+
+    if (Object.keys(insitutos).length) setCentros(insitutos);
+  }, [data]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.currentTarget));
     const currentErrors = [];
+    try {
+      const response = await fetch(`/api/check-code/?centroId=${formData.instituto}&codigo=${formData.codigo}`);
+
+      const { valid, error, id } = await response.json();
+
+      if (error) setCode({ valid, error });
+
+      const {
+        edad,
+        genero,
+        codigo,
+        instituto,
+      } = formData;
+
+      if (currentErrors.length === 0 && valid) {
+        router.push(`/encuesta/?edad=${edad}&genero=${genero}&centroId=${instituto}&codigoId=${id}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
     setErrors([]);
-    const formData = Object.fromEntries(new FormData(e.currentTarget));
     if (!formData.genero) currentErrors.push('genero');
     if (!formData.instituto) currentErrors.push('centro');
 
     setErrors(currentErrors);
-
-    if (currentErrors.length === 0) router.push(`/encuesta/?e=${formData.edad}&g=${formData.genero}&c=${formData.instituto}`);
   };
 
   function onValueChange() {
@@ -50,6 +88,38 @@ export default function Login() {
         cuéntanos un poco sobre tí.
       </h4>
       <Form.Root className="w-full" onSubmit={handleSubmit}>
+        <Form.Field className="grid pb-3 mb-3" name="codigo">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Form.Message
+              className="text-#fcc4c4 opacity-80 pb-1"
+              match="valueMissing"
+            >
+              Por favor introduce un código
+            </Form.Message>
+            {!codeIsValid.valid && (
+              <Form.Message
+                className="text-#fcc4c4 opacity-80 pb-1"
+              >
+                {codeIsValid.error}
+              </Form.Message>
+            )}
+          </div>
+          <Form.Control asChild>
+            <input
+              name="codigo"
+              className="w-full text-center py-4 px-3 box-border inline-flex items-center justify-center text-violet11 rounded-full text-xs"
+              type="text"
+              placeholder="Código"
+              required
+            />
+          </Form.Control>
+        </Form.Field>
         <Form.Field className="grid pb-3 mb-3" name="edad">
           <div
             style={{
@@ -102,9 +172,8 @@ export default function Login() {
           </div>
           <Selector
             name="Genero"
-            options={GENERO_OPTIONS}
+            options={GENERO_OPTIONS.map((genero) => ({ label: genero, value: genero }))}
             onValueChange={onValueChange}
-
           />
         </Form.Field>
         <Form.Field className="grid pb-3 mb-3" name="instituto">
@@ -124,7 +193,7 @@ export default function Login() {
           <Selector
             name="Instituto"
             onValueChange={onValueChange}
-            options={data?.map((el) => el.nombre)}
+            options={centros}
           />
         </Form.Field>
         <Form.Submit asChild>

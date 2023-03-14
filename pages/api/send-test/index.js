@@ -1,8 +1,14 @@
+/* eslint-disable max-len */
 import prisma from '../../../lib/prisma';
 import { toJson } from '../../../utils';
 
 async function saveTest(data) {
-  const response = await prisma.test.create({ data });
+  const response = await prisma.test.create({ data: JSON.parse(data) })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+
   return response;
 }
 

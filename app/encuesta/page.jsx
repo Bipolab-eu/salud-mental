@@ -35,7 +35,7 @@ const questions = [
 ];
 // const fetcher = (...args) => fetch(...args);
 
-function sentTest(data) {
+function sendTest(data) {
   const response = fetch('/api/send-test', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -50,12 +50,10 @@ export default function Encuesta() {
   const [loading, setLoading] = useState(false);
   const formatTest = (formData) => {
     const test = [];
-
     for (const [key, val] of Object.entries(formData)) {
       const answerValues = val.split('-');
       test.push({ question: key.slice(1), answer: answerValues[0], value: +answerValues[1] });
     }
-
     return test;
   };
 
@@ -65,21 +63,31 @@ export default function Encuesta() {
     const formData = Object.fromEntries(new FormData(e.currentTarget));
     const test = formatTest(formData);
 
-    // Obtener del selector y del input
-    const args = {
-      centroId: 35000410,
-      edad: 14,
-      genero: 'Marculino',
-    };
+    const getParams = (uri) => Object.fromEntries(new URLSearchParams(uri?.split('?')[1]));
+    const params = getParams(window.location.href);
 
-    await sentTest({ ...args, test })
+    const {
+      edad,
+      genero,
+      codigoId,
+      centroId,
+    } = params;
+
+    await sendTest({
+      edad: +edad,
+      genero,
+      codigoId: +codigoId,
+      centroId: +centroId,
+      test,
+    })
       .then(() => setOpen(true))
       .catch((error) => {
+        console.log(error);
         setResponse(error.code);
       });
 
     setLoading(false);
-    formRef.reset();
+    // formRef.reset();
   };
 
   return (

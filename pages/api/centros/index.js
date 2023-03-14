@@ -2,7 +2,11 @@ import prisma from '../../../lib/prisma';
 import { toJson } from '../../../utils';
 
 async function getCenters() {
-  const response = await prisma.instituto.findMany();
+  const response = await prisma.centro.findMany()
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
   return response;
 }
 

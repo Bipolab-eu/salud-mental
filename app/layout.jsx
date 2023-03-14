@@ -1,5 +1,5 @@
-import './globals.scss';
-import './tailwind.globals.scss';
+import './styles/globals.scss';
+import './styles/tailwind.globals.scss';
 import Head from 'next/head';
 import fontInter from './styles/fonts';
 
