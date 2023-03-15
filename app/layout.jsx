@@ -3,9 +3,11 @@ import './styles/tailwind.globals.scss';
 import Head from 'next/head';
 import fontInter from './styles/fonts';
 
+import { AppContextProvider } from './context/store';
+
 export const metadata = {
-  title: 'Salud mental adolescentes',
-  description: 'Encuesta para hacer un estudio de la salud mental de los adolescentes en',
+  title: 'Salud mental',
+  description: 'Encuesta para hacer un estudio de la salud mental de los adolescentes en institutos',
 };
 
 export default function RootLayout({ children }) {
@@ -16,10 +18,12 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
       </Head>
       <body className={`${fontInter.className} snap-y snap-mandatory`}>
-        {children}
-        <footer className="fixed bottom-0 flex justify-center w-full py-2">
-          <p>Powered by Bipolab</p>
-        </footer>
+        <AppContextProvider>
+          {children}
+          <footer className="fixed bottom-0 flex justify-center w-full py-2">
+            <p>Powered by Bipolab</p>
+          </footer>
+        </AppContextProvider>
       </body>
     </html>
   );

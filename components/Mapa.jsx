@@ -37,10 +37,10 @@ export default function Map(props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {Object.values(props).map((marker) => (
+      {Object.values(props).map((centro) => (
         <Marker
-          key={marker.center}
-          position={marker.position}
+          key={centro.id}
+          position={centro.coordenadas}
         >
           <Popup
             className="marker-popup"
@@ -50,18 +50,18 @@ export default function Map(props) {
               <li className="pb-2">
                 Nombre del Instituto:
                 <div className="div-0">
-                  {`${marker.center}.`}
+                  {`${centro.nombre}.`}
                 </div>
               </li>
               <li className="pb-2">
                 Media Aritmética Global:
                 <div>
-                  {`(${marker.value}) sobre 100`}
+                  {`(${0}) sobre 100`}
                 </div>
               </li>
               <li className="pb-2">
                 Estado de salud:
-                <div>{marker.status}</div>
+                <div>Bueno</div>
               </li>
               <span className="absolute bottom-2 right-2">
                 cerrar

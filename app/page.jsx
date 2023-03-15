@@ -1,15 +1,9 @@
-// const inter = Inter({ subsets: ['latin'] })
-
-'use client';
-
 import Login from 'components/Login';
 
 export default function App() {
   return (
-    <main className="h-screen text-center snap-mandatory overflow-y-scroll flex flex-col items-center">
-      <section>
-        <Login />
-      </section>
+    <main className="grid grid-cols-1 items-center justify-items-center text-center snap-mandatory overflow-y-scroll h-full">
+      <Login />
     </main>
   );
 }
