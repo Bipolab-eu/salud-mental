@@ -100,3 +100,18 @@ button {
   color: var(--violet11);
   cursor: default;
 }
+
+.SelectCenters {
+  min-height: unset !important;
+  max-width: 60%;
+  text-align: left;
+}
+
+.SelectCenters span:first-child {
+  margin-right: auto;
+  padding-left: 1rem;
+}
+
+.SelectCenters span {
+  padding-right: 10px;
+}

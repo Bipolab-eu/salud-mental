@@ -1,6 +1,5 @@
 import './styles/globals.scss';
 import './styles/tailwind.globals.scss';
-import Head from 'next/head';
 import fontInter from './styles/fonts';
 
 import { AppContextProvider } from './context/store';
@@ -13,10 +12,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <meta name="title" content={metadata.title} />
-        <meta name="description" content={metadata.description} />
-      </Head>
       <body className={`${fontInter.className} snap-y snap-mandatory`}>
         <AppContextProvider>
           {children}

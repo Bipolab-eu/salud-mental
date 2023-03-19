@@ -7,54 +7,33 @@ import * as Accordion from '@radix-ui/react-accordion';
 import * as Label from '@radix-ui/react-label';
 import classNames from 'classnames';
 
-import Selector from 'components/Selector';
-
-import { useAppContext } from '@/context/store';
-
 function CentroAdmin() {
-  const { centros } = useAppContext();
-
   return (
-    <main className="grid h-screen mx-4">
-      <form className="my-auto">
-        <div className="flex flex-wrap gap-[8px]">
-          <label className="text-xs">Seleccione un centro</label>
-          <Selector
-            id="centros"
-            name="Selecciona un centro"
-            options={centros}
-            classNames="centro-label"
-          />
-        </div>
-        <div className="flex flex-wrap gap-[5px] py-4">
-          <Label.Root className="block w-full">
-            ¿Cuantos códigos necesita?
-          </Label.Root>
-          <input
-            id="codigos"
-            name="codigos"
-            className="w-[100px] block h-[35px] rounded-full px-[10px] text-[12px] leading-none text-black outline-none focus:shadow-[0_0_0_1px_#fff] selection:color-white"
-            type="number"
-          />
-        </div>
-        <div className="flex flex-wrap gap-[5px] pb-4">
-          <Label.Root className="block w-full">
-            Email
-          </Label.Root>
-          <input
-            id="email"
-            name="email"
-            className="w-full block h-[35px] rounded-full px-[10px] text-[12px] leading-none text-black outline-none focus:shadow-[0_0_0_1px_#fff] selection:color-white"
-            type="email"
-          />
-        </div>
-        <div className="bg-white text-black p-4 rounded-lg">
-          ¡No te preocupes puedes facilitarnos un email donde recibir los códigos!
-        </div>
-      </form>
+    <main className="grid grid-cols-1 place-content-start h-screen w-auto px-7 mx-auto mt-20">
+      <article className="grid-col-1">
+        <form className="my-auto w-full">
+          <div className="flex flex-wrap gap-[5px] py-4">
+            <Label.Root className="block w-full">
+              ¿Cuantos códigos necesita?
+            </Label.Root>
+            <input
+              id="codigos"
+              name="codigos"
+              className="w-[100px] block h-[35px] rounded-full px-[10px] text-[12px] leading-none text-black outline-none focus:shadow-[0_0_0_1px_#fff] selection:color-white"
+              type="number"
+            />
+          </div>
+          <button
+            type="submit"
+            className="min-w-max md:min-w-min flex mr-auto justicy-center bg-white hover:bg-mauve3 text-violet11 rounded-full text-xs font-medium py-2 px-4"
+          >
+            Solicitar códgos
+          </button>
+        </form>
+      </article>
       <article>
         <Accordion.Root
-          className="bg-mauve6 rounded-md"
+          className="bg-mauve6 rounded-md mt-5"
           type="single"
           defaultValue="item-1"
           collapsible

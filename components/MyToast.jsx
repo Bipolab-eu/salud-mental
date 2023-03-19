@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as Toast from '@radix-ui/react-toast';
 import '@/styles/toast.scss';
+import Link from 'next/link';
 
 // function oneWeekAway(date) {
 //   const now = new Date();
@@ -30,9 +31,12 @@ function ToastDemo({ message, open, setOpen }) {
           </time>
         </Toast.Description>
         <Toast.Action className="ToastAction" asChild altText="Goto schedule to undo">
-          <button type="button" className="Button small green">
-            cerrar
-          </button>
+          <Link
+            href="/"
+            className="Button small green"
+          >
+            Volver
+          </Link>
         </Toast.Action>
       </Toast.Root>
       <Toast.Viewport className="ToastViewport" />

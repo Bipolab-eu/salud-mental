@@ -11,20 +11,20 @@ import useSWR from 'swr';
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const AppContext = createContext();
 
-function getCentros(centros) {
-  const insitutos = {};
+function mapData(centros) {
+  const institutos = {};
   if (centros) {
     centros.forEach((centro) => {
-      insitutos[centro.id] = { value: centro.id, label: centro.nombre };
+      institutos[centro.id] = { value: centro.id, label: centro.nombre };
     });
   }
-  return insitutos;
+  return institutos;
 }
 
 export function AppContextProvider({ children }) {
   const { data } = useSWR('/api/centros', fetcher);
   const store = useMemo(() => ({
-    centros: getCentros(data),
+    centros: mapData(data),
     mapaData: data,
   }), [data]);
 

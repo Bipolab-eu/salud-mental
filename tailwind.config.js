@@ -9,6 +9,15 @@ module.exports = {
     './components/**/*.{js,jsx}',
   ],
   theme: {
+    backgroundSize: {
+      auto: 'auto',
+      cover: 'cover',
+      contain: 'contain',
+      '50%': '50%',
+      sm: '10rem',
+      md: '15rem',
+      lg: '25rem',
+    },
     extend: {
       colors: {
         ...blackA,

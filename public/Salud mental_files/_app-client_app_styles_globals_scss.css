@@ -1,0 +1,61 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@13.2.3_dpxg4zawgzznnxdt7it3f5d76m/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[2].oneOf[14].use[2]!./node_modules/.pnpm/next@13.2.3_dpxg4zawgzznnxdt7it3f5d76m/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[2].oneOf[14].use[3]!./node_modules/.pnpm/next@13.2.3_dpxg4zawgzznnxdt7it3f5d76m/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[2].oneOf[14].use[4]!./node_modules/.pnpm/next@13.2.3_dpxg4zawgzznnxdt7it3f5d76m/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[2].oneOf[14].use[5]!./app/styles/globals.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+h1 {
+  text-align: center;
+}
+
+html {
+  background: linear-gradient(180deg, #686BFB 0%, #764EAB 100%);
+  color: #fff;
+  font-weight: 300;
+}
+
+footer {
+  font-size: 10px !important;
+}
+
+.marker-popup, .leaflet-popup-content-wrapper {
+  width: 217px;
+  min-width: 217px;
+  height: 196px;
+  min-height: 196px;
+  font-family: var(--font-inter) !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: #000 !important;
+  top: unset !important;
+  bottom: 10px;
+  right: 7px !important;
+  padding-right: 7px !important;
+  margin-bottom: 9px !important;
+  margin-right: 4px !important;
+  font-size: 25px !important;
+}
+
+.centro-label {
+  color: red !important;
+}
+
+.leaflet-popup-tip {
+  display: none;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button, div {
+  font-family: var(--font-inter) !important;
+  font-size: 12px;
+}
+
+.leaflet-popup-close-button div {
+  margin: -10px;
+  padding-top: 2px;
+}
+
+h4 {
+  font-size: 12px !important;
+}

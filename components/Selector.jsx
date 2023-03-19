@@ -14,6 +14,7 @@ export default function Selector({
   required,
   onValueChange,
   onOpenChange,
+  classNames,
 }) {
   return (
     <SelectPrimitive.Root
@@ -22,7 +23,7 @@ export default function Selector({
       onValueChange={onValueChange}
       onOpenChange={onOpenChange}
     >
-      <SelectPrimitive.Trigger className="SelectTrigger" aria-label="Food">
+      <SelectPrimitive.Trigger className={classnames('SelectPrimitive', `SelectTrigger ${classNames}`)} aria-label="Food">
         <SelectPrimitive.Value placeholder={name} />
         <SelectPrimitive.Icon className="SelectIcon">
           <ChevronDownIcon />

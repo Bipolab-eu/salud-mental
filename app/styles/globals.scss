@@ -12,6 +12,12 @@ footer {
   font-size: 10px !important;
 }
 
+.login-main {
+  background-image: url('../../public/Group.png');
+  background-repeat: no-repeat;
+  background-position: 50% 1rem;
+}
+
 .marker-popup, .leaflet-popup-content-wrapper {
   width: 217px;
   min-width: 217px;
